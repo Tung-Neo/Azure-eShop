@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using MovieApp.Models;
+using MovieApp.Models.ViewModels;
+
 
 namespace MovieApp.Controllers
 {
@@ -22,10 +19,18 @@ namespace MovieApp.Controllers
         //public IActionResult Index() => View(repositiry.Products);
 
         public ViewResult Index(int productPage = 1)
-            => View(repositiry.Products
+            => View(new ProductListViewModel
+            {
+                Products = repositiry.Products
                 .OrderBy(p => p.ProductID)
                 .Skip((productPage - 1) * PageSize)
-                .Take(PageSize)
-                );
+                .Take(PageSize),
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = productPage,
+                    ItemsPerPage = PageSize,
+                    TotalItems = repositiry.Products.Count()
+                }
+            });
     }
 }

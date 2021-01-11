@@ -1,6 +1,5 @@
-﻿@*Sử dụng Model để lấy dữ liệu truyền cho View*@
-@model IQueryable<Product>
-@foreach (var p in Model)
+﻿@model ProductListViewModel
+@foreach (var p in Model.Products)
 {
     <div>
         <h3>@p.Name</h3>
@@ -8,3 +7,5 @@
         <h4>@p.Price.ToString("c")</h4>
     </div>
 }
+
+<div page-model="@Model.PagingInfo" page-action="Index"></div>
