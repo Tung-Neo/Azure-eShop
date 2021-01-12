@@ -12,6 +12,6 @@ namespace MovieApp.Models.ViewModels
         public int CurrentPage { get; set; }
 
         public int TotalPage =>
-            (int)Math.Ceiling((decimal)TotalItems / TotalPage);
+            (int)Math.Ceiling((decimal)TotalItems / ItemsPerPage);
     }
 }
